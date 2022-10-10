@@ -19,5 +19,12 @@ pipeline {
                      }
         } 
     }
+      stage('Docker Build and Push') {
+            steps {
+              sh "printenv"
+              sh 'docker build -t gcr.io/k8s-dev-sec-ops/numeric-app:""$GIT_COMMIT"" .'
+              sh 'docker push gcr.io/k8s-dev-sec-ops/numeric-app:""$GIT_COMMIT""'
+            } 
+    }
   }
 }
