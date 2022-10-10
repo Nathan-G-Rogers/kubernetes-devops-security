@@ -24,7 +24,7 @@ pipeline {
             script {
                 docker.withRegistry('https://gcr.io', 'gcr:k8s-dev-sec-ops') {
                   def customImage = docker.build("k8s-dev-sec-ops/numeric-app:${env.GIT_COMMIT}")
-                  dockerImage.push()
+                  customImage.push()
                 }
             }
         }
