@@ -19,7 +19,7 @@ pipeline {
                      }
         } 
     }
-    stage('Push Image') {
+    stage('Build and Push Image') {
         steps {
             script {
                 docker.withRegistry('https://gcr.io', 'gcr:k8s-dev-sec-ops') {
