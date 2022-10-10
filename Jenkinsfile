@@ -19,14 +19,15 @@ pipeline {
                      }
         } 
     }
-      stage('Docker Build and Push') {
-            steps {
-              withDockerRegistry([credentialsId: 'gcr:k8s-dev-sec-ops', url: 'gcr.io']) {
-                sh "printenv"
-                sh 'docker build -t gcr.io/k8s-dev-sec-ops/numeric-app:""$GIT_COMMIT"" .'
-                sh 'docker push gcr.io/k8s-dev-sec-ops/numeric-app:""$GIT_COMMIT""'
-         } 
-      }
+    stage('Push Image') {
+        steps {
+            script {
+                docker.withRegistry('https://gcr.io', 'gcr:k8s-dev-sec-ops') {
+                  def customImage = docker.build("k8s-dev-sec-ops/numeric-app:${env.GIT_COMMIT}")
+                  dockerImage.push()
+                }
+            }
+        }
     }
   }
 }
