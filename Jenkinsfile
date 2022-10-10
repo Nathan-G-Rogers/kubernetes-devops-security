@@ -21,7 +21,7 @@ pipeline {
     }
       stage('Docker Build and Push') {
             steps {
-              withDockerRegistry([credentialsId: "gcr:k8s-dev-sec-ops", url: "gcr.io"]) {
+              withDockerRegistry([credentialsId: 'gcr:k8s-dev-sec-ops', url: 'gcr.io']) {
                 sh "printenv"
                 sh 'docker build -t gcr.io/k8s-dev-sec-ops/numeric-app:""$GIT_COMMIT"" .'
                 sh 'docker push gcr.io/k8s-dev-sec-ops/numeric-app:""$GIT_COMMIT""'
