@@ -36,6 +36,13 @@ pipeline {
             }
           }
     }
+    stage('Sonar Qube - quality gate') {
+      steps {
+      timeout(time: 2, unit: 'MINUTES') {
+          waitForQualityGate abortPipeline: true
+        }
+      }
+    }
     stage('Build and Push Image') {
         steps {
             script {
