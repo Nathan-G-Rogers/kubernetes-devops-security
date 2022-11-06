@@ -33,5 +33,5 @@ then
 
 else
         echo "The Service does not have a NodePort"
-        exit 1;
+#        exit 1;
 fi;
