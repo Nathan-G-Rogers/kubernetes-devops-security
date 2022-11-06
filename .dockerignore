@@ -1,4 +1,5 @@
-/var/lib/jenkins/workspace/devsecops-numeric-application/trivy
+/var/lib/jenkins/workspace/devsecops-numeric-application/trivy/
 /var/lib/jenkins/workspace/devsecops-numeric-application/trivy/*
+/var/lib/jenkins/workspace/devsecops-numeric-application/trivy/.*
 secrets
 secrets/config
