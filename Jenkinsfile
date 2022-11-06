@@ -139,58 +139,58 @@ pipeline {
     }
           
 
- //    stage('Integration Tests - DEV') {
- //      steps {
- //        script {
- //          try {
- //            withKubeConfig([credentialsId: 'kubeconfig']) {
- //              sh "bash integration-test.sh"
- //            }
- //          } catch (e) {
- //            withKubeConfig([credentialsId: 'kubeconfig']) {
- //              sh "kubectl -n default rollout undo deploy ${deploymentName}"
- //            }
- //            throw e
- //          }
- //        }
- //      }
- //    }
+    stage('Integration Tests - DEV') {
+      steps {
+        script {
+          try {
+            withKubeConfig([credentialsId: 'kubeconfig']) {
+              sh "bash integration-test.sh"
+            }
+          } catch (e) {
+            withKubeConfig([credentialsId: 'kubeconfig']) {
+              sh "kubectl -n default rollout undo deploy ${deploymentName}"
+            }
+            throw e
+          }
+        }
+      }
+    }
 
- //   stage('OWASP ZAP - DAST') {
- //      steps {
- //        withKubeConfig([credentialsId: 'kubeconfig']) {
- //          sh 'bash zap.sh'
- //        }
- //      }
- //    }
+   stage('OWASP ZAP - DAST') {
+      steps {
+        withKubeConfig([credentialsId: 'kubeconfig']) {
+          sh 'bash zap.sh'
+        }
+      }
+    }
 
- //    stage('Prompte to PROD?') {
- //      steps {
- //        timeout(time: 2, unit: 'DAYS') {
- //          input 'Do you want to Approve the Deployment to Production Environment/Namespace?'
- //        }
- //      }
- //    }
+    stage('Prompte to PROD?') {
+      steps {
+        timeout(time: 2, unit: 'DAYS') {
+          input 'Do you want to Approve the Deployment to Production Environment/Namespace?'
+        }
+      }
+    }
 
- //    stage('K8S CIS Benchmark') {
- //      steps {
- //        script {
+    stage('K8S CIS Benchmark') {
+      steps {
+        script {
 
- //          parallel(
- //            "Master": {
- //              sh "bash cis-master.sh"
- //            },
- //            "Etcd": {
- //              sh "bash cis-etcd.sh"
- //            },
- //            "Kubelet": {
- //              sh "bash cis-kubelet.sh"
- //            }
- //          )
+          parallel(
+            "Master": {
+              sh "bash cis-master.sh"
+            },
+            "Etcd": {
+              sh "bash cis-etcd.sh"
+            },
+            "Kubelet": {
+              sh "bash cis-kubelet.sh"
+            }
+          )
 
- //        }
- //      }
- //    }
+        }
+      }
+    }
 
  //    stage('K8S Deployment - PROD') {
  //      steps {
